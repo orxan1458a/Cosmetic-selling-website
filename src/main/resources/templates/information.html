@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="informationStyle.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+
+    <!-- instagram logo -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+    <title>Document</title>
+</head>
+
+<body>
+<div class="background"></div>
+<header>
+    <div class="flex">
+
+        <div class="logo">
+            <h1>PHAR</h1>
+            <img src="../static/resources/images/logo.jpeg" th:src="@{/resources/images/logo.jpeg}" alt="">
+        </div>
+        <div class="axtar">
+            <input type="text" class="" placeholder="axtar...">
+            <input type="submit" value="Axtar">
+        </div>
+    </div>
+
+</header>
+<div class="pink-container" id="pink">
+    <div class="text-container">
+        <div><a href="/kosmetikalar"> Əsas səhifə</a></div>
+        <div><a href="/brendler"> Brendlər</a></div>
+        <div><a href="/melumatlar" style="text-decoration:underline">Məlumatlar</a></div>
+        <div><a href="/bizimle-elaqe">Bizimlə əlaqə</a></div>
+    </div>
+</div>
+
+
+<div class="container">
+    <div class="flex-row-container">
+        <div class="flex-row-item" th:id="${information.id}" th:each="information : ${informationn}">
+            <a th:href="@{/kosmetikalar/etrafli-melumat(id=${information.id})}"><img th:src="*{'data:image/jpeg;base64,'+{information.image}}"></a>
+            <div class="content">
+                <a th:href="@{/kosmetikalar/etrafli-melumat(id=${information.id})}"><h2 style="font-size: 1vw;text-decoration:underline" th:text="${information.title}" ></h2></a>
+                <p th:text="${information.shortContent}"> </p>
+            </div>
+        </div>
+
+
+    </div>
+
+
+</div>
+<div style="width:100%;display:flex;justify-content:center">
+
+    <ul>
+        <li><a th:if="${currentPage > 1}" th:href="@{'/melumatlar/page/'+${currentPage-1}}">«</a></li>
+        <div th:each="i:${#numbers.sequence(1,totalPages)}"><!-- sehifenin sayi qeder dovr edir bu kod-->
+            <li><a th:if="${i!=currentPage}" th:href="@{'/melumatlar/page/'+ ${i}}">[[${i}]]</a></li><!--bu span blokunun bu setri reqeqmleri duyme kimi  cixarir  meselen 1 2 3 4 ,meselen 2ci sehifedeyemse 2 ni cixartmir olacaq 1,3,4-->
+            <li><span th:unless="${i !=currentPage}">[[${i}]]</span></li><!--Bu setirde hansi sehifedeyemse onu cixarir duyme kimi olmur yeni ustune basmaq olmur,meselen 1,2,3,4 un 2 ci sehifesindeyemse ancaq 2 ni cixarir -->
+        </div>
+        <li><a th:if="${currentPage < totalPages}" th:href="@{'/melumatlar/page/'+${currentPage+1}}">»</a></li>
+    </ul>
+</div>
+
+<footer>
+    <div class="footer">
+        <div class="footer-flex">
+            <h5>Bizimlə sosial şəbəkə üzərindən əlaqə saxlayın :</h5>
+            <div>
+                <a href="https://instagram.com/phar.cosmetics.baku?igshid=YmMyMTA2M2Y="
+                   style="text-decoration: none;">
+                    <i class="fa fa-instagram" style="font-size:48px;color:#FF1464;margin-top: 0.7vw;">
+                    </i>
+                </a>
+                <a href="https://t.me/pharcosmetics">
+                    <i class="fa fa-telegram" style="font-size:48px;color:#34ABE3"></i>
+                </a>
+            </div>
+        </div>
+        <hr>
+        <div>
+            <div class="footer-flex2">
+                <div class="pharAbout">
+                    <div style="margin-bottom: 2vw;">PHAR</div>
+                    <div>"PHAR Baku Cosmetics" saytı <br>2022-ci ildən öz fəaliyyətinə başladı və hal-hazırda <br>
+                        fəaliyyətini davam etdirir.
+                        Məqsədimiz yüksək keyfiyyətli <br> məhsulları sizlərə təqdim edərək, sizi məmnun etməkdir. <br> Bizi
+                        seçərək, hər zaman olduğu kimi gözəl və <br> təravətli qalın.
+                    </div>
+                </div>
+                <div class="kateqoriyalar">
+                    <div style="margin-bottom: 2vw;">KATEQORIYALAR</div>
+                    <div><a th:href="@{/kosmetikalar/kateqoriyalar(kateqoriya='goz-ucun-olan-butun-mehsullar')}">Göz üçün</a> </div>
+                    <div><a th:href="@{/kosmetikalar/kateqoriyalar(kateqoriya='uz-ucun-olan-butun-mehsullar')}">Üz üçün</a> </div>
+                    <div><a th:href="@{/kosmetikalar/kateqoriyalar(kateqoriya='dodaq-ucun-olan-butun-mehsullar')}">Dodaq üçün</a></div>
+                    <div><a th:href="@{/kosmetikalar/kateqoriyalar(kateqoriya='sac-ucun-olan-butun-mehsullar')}">Saç üçün</a> </div>
+                </div>
+                <div class="kecidler">
+                    <div style="margin-bottom: 2vw;">KEÇİDLƏR</div>
+                    <div><a href="/kosmetikalar">Əsas səhifə</a></div>
+                    <div><a href="brendler">Brendlər</a></div>
+                    <div><a href="melumatlar">Məlumatlar</a></div>
+                    <div><a href="bizimle-elaqe">Bizimlə əlaqə</a></div>
+                </div>
+                <div class="elaqe">
+                    <div style="margin-bottom: 2vw;">ƏLAQƏ</div>
+                    <div>Azərbaycan,Bakı</div>
+                    <div>info@phar.com</div>
+                    <div>+994 55 267 70 57</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <h2>PHAR Baku Cosmetics</h2>
+
+</footer>
+
+<script>
+        window.onscroll = function () { myFunction() };
+
+        var header = document.getElementById("pink");
+        var sticky = header.offsetTop;
+
+        function myFunction() {
+            if (window.pageYOffset > sticky) {
+                header.classList.add("sticky");
+            } else {
+                header.classList.remove("sticky");
+            }
+        }
+    </script>
+<style>
+    html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+
+/* ----------------------------------------------------------------------CSS reset-------------------------------------------------------------------------------- */
+
+header{
+    background-color: #FBFBFB;
+    height: 8.5vw;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+}
+.sticky{
+    position: fixed;
+    top: 0;
+    width: 100%;
+  }
+  .background{
+    position: fixed;
+    background-color: rgb(250, 241, 241);
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+}
+.flex{
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+}
+.axtar{
+    margin-top: 3.5%;
+    font-size: 1.2vw;
+}
+.axtar input[type="submit"]{
+    width: 5vw;
+    height: 2.5vw;
+    border-radius: 10px;
+    border:0px;
+    background-color: #CB867F;
+    color: white;
+    font-size: 1.2vw;
+
+}
+.axtar input[type="text"]{
+    width: 13vw;
+    height: 2vw;
+    border-radius: 5px;
+    border: 1px solid #CB867F;
+    font-size: 1.2vw;
+}
+.name{
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 1.3rem;
+}
+textarea{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 1.3rem;
+}
+
+.logo{
+    color:#CB867F;
+    font-size: 5.4vw;
+    margin-top: 1.7%;
+    font-family: "Century Gothic",Verdana,sans-serif;
+    font-weight: bold;
+
+}
+.logo h1{
+    position: relative;
+    left: 41.5vw;
+}
+.logo img{
+    width: 6.5vw;
+    left: 40vw;
+    top: 1vw;
+    position: absolute;
+}
+
+.pink-container{
+    background: -webkit-linear-gradient(left, #CB867F, #eb4c4c);
+    width: 100%;
+    height: 4vw;
+    display: flex;
+    color: white;
+    box-shadow: rgba(0, 0, 0,0.2) 0px 25px 55px;
+    z-index: 1;
+}
+.pink-container div{
+    margin-left: 2% ;
+    margin-top: 0.5% ;
+    font-size: 2vw;
+}
+.text-container{
+    width: 95vw;
+    display: flex;
+    justify-content: center;
+    font-family: Verdana, sans-serif;
+}
+
+a:link {
+    color: white;
+    text-decoration: none;
+  }
+
+  a:visited {
+    color: white;
+  }
+
+a:hover {
+    text-decoration: underline;
+    font-weight: 600;
+  }
+.container{
+    margin: auto;
+    width: 70vw;
+    min-height:40vh;
+    background-color: white;
+    margin-top: 1vw;
+    border: 1px solid rgb(249, 238, 238);
+    margin-bottom:2vw ;
+    padding-bottom:2vw ;
+}
+/* column and row */
+.flex-row-container {
+
+    position: relative;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    margin: 1vw;
+  }
+  .flex-row-item > a>img{
+      margin: left;
+      width: 21vw;
+      height: 10vw;
+  }
+  .flex-row-item{
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(186, 186, 186, 0.8);
+    height: 20vw;
+    width: 21.5vw;
+
+    font-size: 3vw;
+    text-align: center;
+    margin: 0.5vw;
+  }
+  .flex-row-item h2:hover{
+
+  font-weight: bold;
+  color:steelblue
+  }
+  .content{
+      margin: 1vw;
+  }
+  *{
+    box-sizing:border-box;
+    outline:none;
+  }
+   h2{ margin:auto;
+      margin-top: 0.5vw;
+      margin-bottom: -1.5vw;
+      text-align: justify;
+      font-size: 1.7vw;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-weight: 700;
+      color: #11698E;
+
+  }
+  p{
+    margin-top: 2vw;
+    font-size: 1.2vw;
+    font-family: 'Roboto Slab', serif;
+    color: rgb(66, 66, 66);
+    text-align: justify;
+}
+
+
+/* ------------Pagination---------------- */
+ul{
+
+    display: flex;
+    background-color: #fff;
+    border-radius: 4px;
+}
+ul li{
+    list-style: none;
+    margin: 2px;
+
+}
+ul li a{
+
+    display: block;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    background:#fff;
+    color:#262626;
+    text-decoration: none;
+    border-radius: 4px;
+    box-shadow: inset 0 5px 10px rgba(0, 0, 0,0.1),0 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+ul li a:hover{
+    background:royalblue;
+    color: white;
+    font-weight:bold
+}
+ul span{
+    display: block;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    background:	royalblue;
+    color:white;
+    text-decoration: none;
+    border-radius: 4px;
+    box-shadow: inset 0 5px 10px rgba(0, 0, 0,0.1),0 2px 5px rgba(0, 0, 0, 0.5);
+
+}
+/* -----------footer -------------- */
+.footer {
+    width: 100%;
+    height: 19vw;
+    background-color: #F8F9FA;
+    margin-top: 2vw;
+    margin-bottom: 0;
+
+}
+
+footer {
+    width: 100%;
+    height: 23vw;
+    background: -webkit-linear-gradient(left, #cb7a70, #eb4c4c);
+}
+
+footer h2 {
+    color: white;
+    text-align: center;
+    font-family: Verdana, sans-serif;
+
+}
+
+footer h5{
+    color: #797585;
+    letter-spacing: 1px;
+    font-family: Verdana, sans-serif;
+    font-size: 1.3vw;
+    margin-top: 1.5vw;
+
+}
+.footer-flex{
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+}
+.footer-flex2{
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    width: 70%;
+}
+.pharAbout div{
+    margin:1vw;
+    text-align: center;
+    color: #797585;
+    font-family: Verdana, sans-serif;
+
+}
+.kateqoriyalar div{
+    margin:1vw;
+    text-align: center;
+    color: #797585;
+    font-family: Verdana, sans-serif;
+
+}
+.kateqoriyalar div a{
+    text-decoration: none;
+    color: #2789E3;
+    font-family: Verdana, sans-serif;
+
+}
+.elaqe div{
+    margin:1vw;
+    text-align: center;
+    color: #797585;
+    font-family: Verdana, sans-serif;
+
+}
+.kecidler div{
+    margin:1vw;
+    text-align: center;
+    color: #797585;
+    font-family: Verdana, sans-serif;
+
+}
+.kecidler div a{
+    text-decoration: none;
+    color: #2789E3;
+    font-family: Verdana, sans-serif;
+
+}
+
+
+<!--------->
+
+
+
+
+</style>
+</body>
+
+</html>
