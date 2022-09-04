@@ -76,7 +76,7 @@
 
     <div class="center-container">
         <div class="info-container" th:id="${cosmetic.id}">
-            <img  th:src="*{'data:image/jpeg;base64,'+{cosmetic.image}}" alt="">
+            <img  th:src="${cosmetic.image}" alt="">
             <div>
                 <h2 th:text="${cosmetic.name}"></h2>
                 <h3 class="qiymet" >Qiymət : <span class="price" th:text="${cosmetic.price}+' AZN'"> </span></h3>
@@ -95,7 +95,7 @@
                 <br>
                 <h5 th:text="'Məhsulun kodu : '+${cosmetic.cosmeticCode}"></h5>
                 <h3>Məhsul haqqında</h3>
-                <p th:text="${cosmetic.productAbout}"></p>
+                <p style="white-space: pre;" th:text="${cosmetic.productAbout}"></p>
             </div>
 
         </div>
@@ -105,7 +105,7 @@
             <div class="flex-row-container">
                 <div class="flex-row-item" th:id="${cosmetic.id}" th:each="cosmetic : ${category}">
                     <a th:href="@{/kosmetikalar/info(id=${cosmetic.id})}"><img
-                            th:src="*{'data:image/jpeg;base64,'+{cosmetic.image}}" alt="">
+                            th:src="${cosmetic.image}" alt="">
                         <h2 style="font-size: 1vw;" th:text="${cosmetic.name}"></h2>
                     </a>
 

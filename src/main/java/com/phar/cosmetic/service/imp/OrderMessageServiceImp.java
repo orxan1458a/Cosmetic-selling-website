@@ -18,7 +18,7 @@ public class OrderMessageServiceImp implements OrderMessageService {
     @Autowired
     CosmeticRepository cosmeticRepository;
     @Override
-    public void saveDB(String name, String surName, String phone, String address, int count, Long cosmeticId) {
+    public void saveDB(String name, String surName, String phone, String address, int count, Long cosmeticId,String addressDetail) {
         String cosmeticName= cosmeticRepository.findById(cosmeticId).get().getName();
         Long cosmeticCode=cosmeticRepository.findById(cosmeticId).get().getCosmeticCode();
         double price=cosmeticRepository.findById(cosmeticId).get().getPrice();
@@ -28,6 +28,7 @@ public class OrderMessageServiceImp implements OrderMessageService {
         message.setSurName(surName);
         message.setPhone(phone);
         message.setAddress(address);
+        message.setAddressDetail(addressDetail);
         message.setCount(count);
         message.setCosmeticName(cosmeticName);
         message.setCosmeticId(cosmeticId);

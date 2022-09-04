@@ -13,7 +13,7 @@ public class UserServiceImp implements UserService {
     UserRepository userRepository;
     @Override
     public void saveDB() {
-        String password="parviz";
+        String password="parviz367";
         userRepository.deleteAll();
         User user=new User();
         user.setUserName("parviz");

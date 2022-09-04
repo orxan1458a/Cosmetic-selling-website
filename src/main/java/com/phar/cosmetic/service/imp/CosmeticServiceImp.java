@@ -17,7 +17,7 @@ public class CosmeticServiceImp implements CosmeticService {
     @Autowired
     CosmeticRepository cosmeticRepository;
     @Override
-    public void add(String productName, String brendName, Long cosmeticCode,Double firstPrice, Double price, String productAbout, String category,String subCategory, MultipartFile image) {
+    public void add(String productName, String brendName, Long cosmeticCode,Double firstPrice, Double price, String productAbout, String category,String subCategory, String image) {
         Cosmetic cosmetic=new Cosmetic();
         cosmetic.setName(productName);
         cosmetic.setBrandName(brendName);
@@ -32,11 +32,8 @@ public class CosmeticServiceImp implements CosmeticService {
 
         LocalDateTime localDateTime = LocalDateTime.now();
         cosmetic.setCurrentDateTime(localDateTime);
-        try {
-            cosmetic.setImage(Base64.getEncoder().encodeToString(image.getBytes()));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+            cosmetic.setImage(image);
+
         cosmeticRepository.save(cosmetic);
 
     }
@@ -49,7 +46,7 @@ public class CosmeticServiceImp implements CosmeticService {
     @Override
     public Cosmetic findById(Long id) {
 
-        return cosmeticRepository.getById(id);
+        return cosmeticRepository.findById(id).get();
     }
 
     @Override
@@ -173,13 +170,14 @@ public class CosmeticServiceImp implements CosmeticService {
     }
 
     @Override
-    public void update(Long id, String name, String brandName, String category, Long cosmeticCode, Double price) {
+    public void update(Long id, String name, String brandName, String category, Long cosmeticCode, Double price,String productAbout) {
         Cosmetic cosmetic=findById(id);
         cosmetic.setName(name);
         cosmetic.setBrandName(brandName);
         cosmetic.setCategory(category);
         cosmetic.setCosmeticCode(cosmeticCode);
         cosmetic.setPrice(price);
+        cosmetic.setProductAbout(productAbout);
         cosmeticRepository.save(cosmetic);
     }
 
@@ -196,10 +194,13 @@ public class CosmeticServiceImp implements CosmeticService {
 
     @Override
     public Set<String> brandNames() {
+        int size=findAll().size();
+        List<Cosmetic> products=findAll();
         Set<String> brandNames= new HashSet<>();
-        for (int i=0;i<findAll().size();i++)
+        for (int i=0;i<size;i++)
         {
-            brandNames.add(findAll().get(i).getBrandName());
+
+            brandNames.add(products.get(i).getBrandName());
         }
 
 

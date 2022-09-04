@@ -147,7 +147,7 @@
         <div class="flex-row-container" >
             <div class="flex-row-item" th:id="${cosmetic.id}" th:each="cosmetic : ${cosmetics}">
                 <a th:href="@{/kosmetikalar/info(id=${cosmetic.id})}">
-                    <img th:src="*{'data:image/jpeg;base64,'+{cosmetic.image}}">
+                    <img th:src="${cosmetic.image}">
                     <h2  th:text="${cosmetic.name}"></h2>
 
                 </a><span class="price" th:text="${cosmetic.price}+' AZN'"> </span>
@@ -194,7 +194,7 @@
         <div>
             <div class="footer-flex2">
                 <div class="pharAbout">
-                    <div style="margin-bottom: 2vw;">PHAR</div>
+                    <div>PHAR</div>
                     <div>"PHAR Baku Cosmetics" saytı <br>2022-ci ildən öz fəaliyyətinə başladı və hal-hazırda <br>
                         fəaliyyətini davam etdirir.
                         Məqsədimiz yüksək keyfiyyətli <br> məhsulları sizlərə təqdim edərək, sizi məmnun etməkdir.
@@ -234,8 +234,7 @@
             </div>
         </div>
     </div>
-    <h2>PHAR Baku Cosmetics</h2>
-
+    <div class="bottom"><h2>Phar Cosmetic Baku</h2></div>
 </footer>
 <script>
   window.onscroll = function () { myFunction() };
@@ -451,11 +450,12 @@ input[type="text"]{
 
 .center-container{
     width: 67vw;
-    min-height: 85vh;
+    height: auto;
     background-color: white;
     margin: 1vw;
     margin-top:1vw ;
     border-radius: 5px;
+    padding-bottom:2vw;
 
 }
 .right-container{
@@ -510,12 +510,12 @@ font-size: 1.2vw;
       height:14vw;
   }
   .flex-row-item h2{
-    font-size:1vw;
+    font-size:20px;
   }
   .flex-row-item{
     background-color: rgba(255, 255, 255, 0.8);
     border: 1px solid rgba(186, 186, 186, 0.8);
-    height: 25vw;
+    height: auto;
     width: 20vw;
     padding: 1vw;
     font-size: 30px;
@@ -752,34 +752,56 @@ ul span{
     box-shadow: inset 0 5px 10px rgba(0, 0, 0,0.1),0 2px 5px rgba(0, 0, 0, 0.5);
 
 }
+
 /* -----------footer -------------- */
 .footer {
     width: 100%;
-    height: 19vw;
+    height: auto;
     background-color: #F8F9FA;
     margin-top: 2vw;
     margin-bottom: 0;
+    padding-bottom: 30px ;
 
 }
 
 footer {
     width: 100%;
-    height: 23vw;
     background-color: #048c91f5;
 }
+.bottom{
+    width: 100%;
+    height: 70px;
+    background-color: #048c91f5;
+    line-height: 70px;
+    text-align: center;
+
+
+}
 .instagram{
-    width: 40px;
-    margin-top: 0.7vw;
+    width: 37px;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-40%);
+    right: 10px;
 }
 .telegram{
-    width: 40px;
-    color:#34ABE3
+    width: 45px;
+    color:#34ABE3;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-40%);
 }
 
 footer h2 {
     color: white;
     text-align: center;
     font-family: Verdana, sans-serif;
+    font-size: 2rem;
+    display: inline-block;
+    vertical-align: middle;
+    line-height: normal;
 
 }
 footer h5{
@@ -787,7 +809,10 @@ footer h5{
     letter-spacing: 1px;
     font-family: Verdana, sans-serif;
     font-size: 1.3vw;
-    margin-top: 1.5vw;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
 
 }
 .footer-flex{
@@ -795,6 +820,8 @@ footer h5{
     display: flex;
     justify-content: space-between;
     width: 90%;
+    height: 60px;
+    position: relative;
 }
 .footer-flex2{
     margin: auto;
@@ -846,6 +873,9 @@ footer h5{
     font-family: Verdana, sans-serif;
 
 }
+
+
+
 
 
 
@@ -1006,6 +1036,8 @@ footer h5{
 }
 
 
+
+
 /* ================================================ */
 
 @media (max-width:960px){
@@ -1026,7 +1058,7 @@ footer h5{
 
     .background {
         position: fixed;
-        background-color: rgb(240, 240, 240);
+        background-color: rgb(211, 209, 209);
         width: 100%;
         height: 100%;
         z-index: -1;
@@ -1043,17 +1075,18 @@ footer h5{
 
     }
 
-    input[type="submit"] {
-        width: 12vw;
+    .flex input[type="submit"] {
+        width: 13vw;
         height: 8.5vw;
         border-radius: 10px;
         border: 1px solid gray;
         background-color: #02c8cf;
         color: white;
+
     }
 
-    input[type="text"] {
-        width: 32vw;
+    .flex input[type="text"] {
+        width: 30vw;
         height: 8.5vw;
         border-radius: 5px;
         border: 1px solid #03989e;
@@ -1079,16 +1112,7 @@ footer h5{
         top: 1vw;
         position: absolute;
     }
-
-    .center-container i {
-        padding-top: 3vw;
-        right: 4.2vw;
-        color: gray;
-        position: absolute;
-        font-size: 2.5vw;
-    }
-
-    .pink-container {
+.pink-container {
         background-color: #048c91f5;
         width: 100%;
         height: 7vw;
@@ -1098,20 +1122,30 @@ footer h5{
         box-shadow: rgba(0, 0, 0, 0.2) 0px 25px 55px;
 
     }
-
     .pink-container div {
         margin-left: 2%;
         margin-top: 0.5%;
         font-size:3.5vw;
 
     }
-
-    .text-container {
+.text-container {
         width: 95%;
         display: flex;
         justify-content: center;
         font-family: Verdana, sans-serif;
     }
+    .center-container i {
+        padding-top: 3vw;
+        right: 4.2vw;
+        color: gray;
+        position: absolute;
+        font-size: 2.5vw;
+    }
+
+
+
+
+
 
     .body-container {
         display: contents;
@@ -1142,11 +1176,11 @@ footer h5{
 
     .center-container {
         width: 95%;
-        min-height: 85vh;
+        height: auto;
         background-color: white;
         border-radius: 5px;
         margin: auto;
-        margin-top: 2vw;
+        padding-bottom:25px;
 
 
     }
@@ -1184,6 +1218,8 @@ footer h5{
         font-weight: 700;
         color: #11698E;
         padding: 3vw;
+        font-size: 30px;
+        text-align: center;
     }
     .left-container{
         font-size: 5vw;
@@ -1232,13 +1268,20 @@ footer h5{
 
     .flex-row-item>a>img {
         width: 50vw;
-        height:50vw;
+        height: 50vw;
     }
+      .flex-row-item h2{
+        font-size:15px;
+    }
+    .flex-row-item span{
+    font-style:italic;
+    font-size:18px;
+}
 
     .flex-row-item {
         background-color: rgba(255, 255, 255, 0.8);
         border: 1px solid rgba(186, 186, 186, 0.8);
-        min-height: 80vw;
+        height: 80vw;
         width: 80vw;
         padding: 1vw;
         font-size: 5vw;
@@ -1246,18 +1289,12 @@ footer h5{
         margin: auto;
         margin-top: 1vw;
     }
-      .flex-row-item h2{
-    font-size:20px;
-  }
-  .flex-row-item span{
-    font-style:italic;
-    font-size:18px;
-}
 
     * {
         box-sizing: border-box;
         outline: none;
     }
+
 
     /*-------------------------------------------- Acilan Form penceresi------------------------------------------ */
 
@@ -1385,151 +1422,187 @@ footer h5{
     }
 
     /* ------------Pagination---------------- */
-   ul{
+    ul {
 
-    display: flex;
-    background-color: #fff;
-    border-radius: 4px;
-}
-ul li{
-    list-style: none;
-    margin: 2px;
+        display: flex;
+        background-color: #fff;
+        border-radius: 25px;
 
-}
-ul li a{
+    }
 
-    display: block;
-    width: 40px;
-    height: 40px;
-    text-align: center;
-    line-height: 40px;
-    background:#fff;
-    color:#262626;
-    text-decoration: none;
-    border-radius: 4px;
-    box-shadow: inset 0 5px 10px rgba(0, 0, 0,0.1),0 2px 5px rgba(0, 0, 0, 0.5);
-}
+    ul li {
+        list-style: none;
+        margin: 2px;
 
-ul li a:hover{
-    background:royalblue;
-    color: white;
-    font-weight:bold
-}
-ul span{
-    display: block;
-    width: 40px;
-    height: 40px;
-    text-align: center;
-    line-height: 40px;
-    background:	royalblue;
-    color:white;
-    text-decoration: none;
-    border-radius: 4px;
-    box-shadow: inset 0 5px 10px rgba(0, 0, 0,0.1),0 2px 5px rgba(0, 0, 0, 0.5);
+    }
 
-}
+    ul li a {
+
+        display: block;
+        width: 40px;
+        height: 40px;
+        text-align: center;
+        line-height: 40px;
+        background: #fff;
+        color: #262626;
+        text-decoration: none;
+        border-radius: 4px;
+        box-shadow: inset 0 5px 10px rgba(0, 0, 0, 0.1), 0 2px 5px rgba(0, 0, 0, 0.5);
+    }
+
+    ul li:first-child a {
+        border-radius: 20px 0 0 20px;
+    }
+
+    ul li:last-child a {
+        border-radius: 0 20px 20px 0;
+    }
+
+    ul li a:hover {
+        background: #ff006a;
+        color: #fff;
+    }
 
 
    /* -----------footer -------------- */
-    .footer {
-        width: 100%;
-        height: 480px;
-        background-color: #03989e;
-        margin-top: 2vw;
-        margin-bottom: 0;
+            .footer {
+                width: 100%;
+                height: auto;
+                background-color: #03989e;
+                margin-top: 2vw;
+                padding-bottom: 30px;
+                margin-bottom: 0;
+                position: relative;
 
-    }
+            }
 
-    footer {
-        width: 100%;
-        height: 690px;
-        background-color: #048c91f5;
+            footer {
 
-    }
+                width: 100%;
+                height: auto;
+                /* background-color: #048c91f5; */
+                margin-bottom: 2vw;
+            }
 
-    footer h2 {
-        color: white;
-        text-align: center;
-        font-family: Verdana, sans-serif;
-        font-size:15px
+            .bottom {
+                position: static;
+                width: 100%;
+                height: 80px;
+                background-color: #048c91f5;
+                line-height: 80px;
+                text-align: center;
 
-    }
-    footer h5{
-        color: white;
-        letter-spacing: 1px;
-        font-family: Verdana, sans-serif;
-        font-size: 13px;
-        margin-top: 1.5vw;
 
-    }
-    .instagram{
-    width: 30px;
-    margin-top: 0.7vw;
-}
-.telegram{
-    width: 30px;
-    color:#34ABE3
-}
-    .footer-flex{
-        margin: auto;
-        display: flex;
-        justify-content: space-between;
-        width: 90%;
-    }
-    .footer-flex div:first-child{
-        width: 240px;
-    }
-    .footer-flex2{
-        margin: auto;
-        display: list-item;
-        justify-content: space-between;
-        width: 85%;
-    }
-    .pharAbout div{
-        margin:1vw;
-        text-align: center;
-        color: white;
-        font-family: Verdana, sans-serif;
-        margin-bottom: 20px;
+            }
 
-    }
-    .kateqoriyalar div{
-        margin:1vw;
-        text-align: center;
-        color: white;
-        font-family: Verdana, sans-serif;
+            footer h2 {
+                color: white;
+                text-align: center;
+                font-family: Verdana, sans-serif;
+                display: inline-block;
+                vertical-align: middle;
+                line-height: normal;
+                font-size: 20px;
+            }
 
-    }
-    .kateqoriyalar div a{
-        text-decoration: underline;
-        color: white;
-        font-family: Verdana, sans-serif;
+            footer h5 {
+                color: white;
+                letter-spacing: 1px;
+                font-family: Verdana, sans-serif;
+                font-size: 13px;
+                margin-top: 1.5vw;
+                width: 70%;
 
-    }
-    .categoryFlex{
-        display: flex;
-        justify-content: space-between;
-    }
-    .elaqe div{
-        margin:1vw;
-        text-align: center;
-        color: white;
-        font-family: Verdana, sans-serif;
+            }
 
-    }
-    .kecidler div{
-        margin:1vw;
-        text-align: center;
-        color: white;
-        font-family: Verdana, sans-serif;
+            .instagram {
+                width: 30px;
+                right: 38px;
 
-    }
-    .kecidler div a{
-        text-decoration: underline;
-        color: white;
-        font-family: Verdana, sans-serif;
 
-    }
+            }
+
+            .telegram {
+                width: 35px;
+                color: #34ABE3;
+                position: absolute;
+                right: 0px;
+            }
+
+            .footer-flex {
+                display: flex;
+                justify-content: space-between;
+                width: 90%;
+                height: 45px;
+            }
+
+            .footer-flex div:first-child {
+                width: 240px;
+            }
+
+            .footer-flex2 {
+                margin: auto;
+                display: list-item;
+                justify-content: space-between;
+                width: 85%;
+            }
+
+            .pharAbout div {
+                margin: 20px;
+                text-align: center;
+                color: white;
+                font-family: Verdana, sans-serif;
+
+            }
+
+            .kateqoriyalar div {
+                margin: 1vw;
+                text-align: center;
+                color: white;
+                font-family: Verdana, sans-serif;
+
+            }
+
+            .kateqoriyalar div a {
+                text-decoration: underline;
+                color: white;
+                font-family: Verdana, sans-serif;
+
+            }
+
+            .categoryFlex {
+                display: flex;
+                justify-content: space-between;
+                margin-bottom:20px;
+                margin-top:30px
+            }
+
+            .elaqe div {
+                margin: 1vw;
+                text-align: center;
+                color: white;
+                font-family: Verdana, sans-serif;
+
+
+            }
+
+            .kecidler div {
+                margin: 1vw;
+                text-align: center;
+                color: white;
+                font-family: Verdana, sans-serif;
+
+            }
+
+            .kecidler div a {
+                text-decoration: underline;
+                color: white;
+                font-family: Verdana, sans-serif;
+
+            }
+
+
+
 
 
 
@@ -1629,10 +1702,11 @@ ul span{
     .section-dropdown {
         position: relative;
         padding: 5px;
-        background-color: #c6857be0;
+        background-color: #07c4c7;
+        border: 1px solid #03989e;
         top: 0.1vw;
         left: 0;
-        width: 80vw;
+        width: 70vw;
         border-radius: 4px;
         display: none;
         box-shadow: 0 14px 35px 0 rgba(9, 9, 12, 0.4);
@@ -1640,6 +1714,7 @@ ul span{
         pointer-events: none;
         transform: translateY(20px);
         transition: all 200ms linear;
+        left: 10vw;
     }
 
     .sec-center a {
@@ -1664,11 +1739,12 @@ ul span{
         align-items: center;
         justify-content: space-between;
         -ms-flex-pack: distribute;
+
     }
 
     .sec-center a:hover {
-        color: #102770;
-        background-color: #4d3d09;
+        color: white;
+        background-color: #75bfc1;
     }
 
     .sec-center a .uil {

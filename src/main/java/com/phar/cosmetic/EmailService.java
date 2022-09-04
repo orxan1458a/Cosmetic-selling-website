@@ -36,7 +36,7 @@ public class EmailService {
         this.emailSender.send(message);
 
     }
-    public void orderMailSender(Long id,String name,String surName,String phone,String address, int count){
+    public void orderMailSender(Long id,String name,String surName,String phone,String address, int count,String addressDetail){
         double price=cosmeticService.findById(id).getPrice();
         double total=price*count;
 
@@ -44,7 +44,7 @@ public class EmailService {
         orderMessage.setFrom("orxan1458a@mail.ru");
         orderMessage.setTo("orxan1458a@mail.ru");
         orderMessage.setSubject(name+" "+ surName + " adlı müştəridən sifariş var.");
-        orderMessage.setText( "Ad Soyad: "+name+" "+surName+"\n\nÜnvan : "+address+"\n\nPhone :"+phone+"\n\nMəhsulun id-si : "+id+"\n\nQiyməti : "+price+" AZN"+"\n\nSayı : "+count+" ədəd    \n\nYekun məbləğ : "+total+" AZN"+"\n\nMəhsulun linki : "+"http://localhost:8080/kosmetikalar/info?id="+id);
+        orderMessage.setText( "Ad Soyad: "+name+" "+surName+"\n\nÇatdırılma növü : "+address+ "\n\nÜnvan : "+addressDetail+"\n\nPhone :"+phone+"\n\nMəhsulun id-si : "+id+"\n\nQiyməti : "+price+" AZN"+"\n\nSayı : "+count+" ədəd    \n\nYekun məbləğ : "+total+" AZN"+"\n\nMəhsulun linki : "+"http://localhost:8080/kosmetikalar/info?id="+id);
         this.emailSender.send(orderMessage);
 
     }

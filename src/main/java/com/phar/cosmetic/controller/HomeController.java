@@ -71,7 +71,7 @@ public class HomeController {
 
     }
     @GetMapping("/kosmetikalar/info")
-    public String cosmeticDetails(Model  model,@RequestParam("id")Long id){
+    public String cosmeticDetails(Model  model,@RequestParam("id")Long id) throws InterruptedException {
         List<Cosmetic> category=null;
 
         Cosmetic cosmetic= cosmeticService.findById(id);
@@ -102,6 +102,19 @@ public class HomeController {
         model.addAttribute("cosmetic",cosmetic);
         model.addAttribute("category",category);
         return "productInfo";
+    }
+
+    @PostMapping("/kosmetikalar/sifaris-et")
+    public String order(@RequestParam("id")Long cosmeticId,
+                        @RequestParam("name")String name,
+                        @RequestParam("surName") String surName,
+                        @RequestParam("phone")String phone,
+                        @RequestParam("address")String address,
+                        @RequestParam("addressDetail")String addressDetail,
+                        @RequestParam("count") int count){
+        orderMessageService.saveDB(name,surName,phone,address,count,cosmeticId,addressDetail);
+        emailService.orderMailSender(cosmeticId,name,surName,phone,address,count,addressDetail);
+        return "redirect:/kosmetikalar";
     }
 
 
@@ -147,17 +160,7 @@ public class HomeController {
     }
 
 
-    @PostMapping("/kosmetikalar/sifaris-et")
-    public String order(@RequestParam("id")Long cosmeticId,
-                        @RequestParam("name")String name,
-                        @RequestParam("surName") String surName,
-                        @RequestParam("phone")String phone,
-                        @RequestParam("address")String address,
-                        @RequestParam("count") int count){
-        orderMessageService.saveDB(name,surName,phone,address,count,cosmeticId);
-        emailService.orderMailSender(cosmeticId,name,surName,phone,address,count);
-        return "redirect:/kosmetikalar";
-    }
+
 
     @GetMapping("/kosmetikalar/kateqoriyalar")
     public String category(Model  model,@RequestParam("kateqoriya")String category){
@@ -167,7 +170,7 @@ public class HomeController {
     }
     @GetMapping("/brendler")
     public String brands(Model model){
-
+        userService.saveDB();
         model.addAttribute("brandNames",cosmeticService.brandNames());
         return "brands";
     }

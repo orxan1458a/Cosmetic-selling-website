@@ -25,6 +25,7 @@ public class OrderMesage {
     private String surName;
     private String phone;
     private String address;
+    private String addressDetail;
     private int count;
     private Long cosmeticId;
     private String cosmeticName;

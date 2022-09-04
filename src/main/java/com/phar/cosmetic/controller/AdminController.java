@@ -9,10 +9,7 @@ import com.phar.cosmetic.repository.ContactUsMessageRepository;
 import com.phar.cosmetic.repository.CosmeticRepository;
 import com.phar.cosmetic.repository.InformationRepository;
 import com.phar.cosmetic.repository.OrderMessageRepository;
-import com.phar.cosmetic.service.ContactUsMessageService;
-import com.phar.cosmetic.service.CosmeticService;
-import com.phar.cosmetic.service.InformationService;
-import com.phar.cosmetic.service.OrderMessageService;
+import com.phar.cosmetic.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -47,7 +44,8 @@ public class AdminController {
     OrderMessageRepository orderMessageRepository;
     @Autowired
     EmailService emailService;
-
+    @Autowired
+    UserService userService;
 
     @GetMapping({"/admin/kosmetikalar","/admin"})
     public String home(Model model){
@@ -93,14 +91,16 @@ public class AdminController {
     @PostMapping("/admin/update")
     public String update(@RequestParam("id")Long id,
                          @RequestParam("name")String  name,
-                         @RequestParam("brendName")String brandName,
+                         @RequestParam("brandName")String brandName,
                          @RequestParam("category")String category,
-                         @RequestParam("subCategory")String subCategory,
+//                         @RequestParam("subCategory")String subCategory,
                          @RequestParam("cosmeticCode")Long productCode,
-                         @RequestParam("price")Double price)
+                         @RequestParam("price")Double price,
+                         @RequestParam("productAbout")String productAbout)
+
     {
         cosmeticService.findById(id);
-        cosmeticService.update(id,name,brandName,category,productCode,price);
+        cosmeticService.update(id,name,brandName,category,productCode,price,productAbout);
         System.out.println("bazada yenilendi");
         return "redirect:/admin/kosmetikalar";
     }
@@ -115,7 +115,7 @@ public class AdminController {
     }
     @PostMapping("/addProduct")
     public String addProduct(@RequestParam("name")String name,
-                             @RequestParam("image") MultipartFile image,
+                             @RequestParam("image") String image,
                              @RequestParam("brandName")String brandName,
                              @RequestParam("firstPrice")Double firstPrice,
                              @RequestParam("price")Double price,
@@ -146,7 +146,7 @@ public class AdminController {
                                  @RequestParam("url")String url,
                                  @RequestParam("image")MultipartFile image){
         informationService.addInformation(title,content,url,image);
-        return "addInformation";
+        return "redirect:/admin/melumatlar";
     }
     @GetMapping("/admin/melumatlar")
     public String informationAdmin(Model model){
@@ -237,6 +237,7 @@ public class AdminController {
     @GetMapping("/login")
     public String login()
     {
+
         return "login";
     }
 

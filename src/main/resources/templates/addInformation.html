@@ -40,7 +40,7 @@
 </div>
 <div class="background-img"></div>
 <div class="form-container">
-    <form action="/addInformation" method="post" enctype="multipart/form-data">
+    <form th:action="@{/admin/melumat-elave-et}" method="post" enctype="multipart/form-data">
         <label for="productName" id="productNameLabel">Başlıq :</label><input type="text" id="productName" name="title">
         <label for="brandName" id="brandNameLabel">Url :</label><input type="text" id="brandName" name="url">
         <br>

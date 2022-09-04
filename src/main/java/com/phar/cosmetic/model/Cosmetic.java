@@ -26,8 +26,6 @@ public class Cosmetic {
     private String productAbout;
     private String category;
     private String subCategory;
-    @Lob
-    @Column(columnDefinition = "MEDIUMBLOB")
     private String image;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSS")
     private LocalDateTime currentDateTime;
